@@ -2,7 +2,7 @@
 // Edit watchlist.json from the command line. Run with no arguments for help.
 import { parseArgs } from 'node:util';
 import { pathToFileURL } from 'node:url';
-import { loadWatchlist, saveWatchlist, lookupTitle, lookupId, isImdbId, today, TYPES, WATCHLIST_PATH } from './lib.mjs';
+import { loadWatchlist, saveWatchlist, lookupTitle, lookupId, isImdbId, today, TYPES, LIST_ID, WATCHLIST_PATH } from './lib.mjs';
 
 const HELP = `Usage: node scripts/watchlist.mjs <command> [options]
 
@@ -13,12 +13,20 @@ const HELP = `Usage: node scripts/watchlist.mjs <command> [options]
       --title "<title>"    With --id: no network call at all (needs --type, --year optional).
       --note "<text>"      Why it's on the list.
       --source "<text>"    Who/where recommended it.
+      --list <id>          Also put it in a themed list (repeatable, or comma-separated).
+                           If the title is already on the watchlist, just adds the list tags.
       --pick <n>           Take the n-th search result instead of the best match (1-based).
       --dry-run            Print what would be added, write nothing.
+  tag <id|title> --list <id>     Put an existing entry into themed list(s).
+  untag <id|title> --list <id>   Take it out of themed list(s).
+  lists                          Show themed lists with counts.
+  lists add <id> "<name>"        Create a themed list, e.g. lists add comedy "Comedies I'll like".
+  lists rename <id> "<name>"     Change its display name in Stremio.
+  lists remove <id>              Delete the list and its tags (entries stay on the watchlist).
   watched <id|title>       Mark watched (hidden from the Stremio catalog, kept in the file).
   unwatched <id|title>     Undo watched.
   remove <id|title>        Delete the entry.
-  list [--all]             Print unwatched entries (--all includes watched).
+  list [--all] [--list <id>]  Print unwatched entries (--all includes watched).
   check                    Validate watchlist.json.
 `;
 
@@ -30,12 +38,31 @@ const OPTIONS = {
   note: { type: 'string' },
   source: { type: 'string' },
   pick: { type: 'string' },
+  list: { type: 'string', multiple: true },
   'dry-run': { type: 'boolean' },
   all: { type: 'boolean' },
   help: { type: 'boolean', short: 'h' },
 };
 
-const fmt = (it) => `${it.id}  ${it.type.padEnd(6)}  ${it.title}${it.year ? ` (${it.year})` : ''}${it.watched ? '  [watched]' : ''}`;
+const fmt = (it) =>
+  `${it.id}  ${it.type.padEnd(6)}  ${it.title}${it.year ? ` (${it.year})` : ''}${it.lists?.length ? `  #${it.lists.join(' #')}` : ''}${it.watched ? '  [watched]' : ''}`;
+
+function wantedLists(data, raw = []) {
+  const ids = [...new Set(raw.flatMap((s) => s.split(',')).map((s) => s.trim()).filter(Boolean))];
+  const known = new Set((data.lists ?? []).map((l) => l.id));
+  const missing = ids.filter((id) => !known.has(id));
+  if (missing.length) {
+    throw new Error(`unknown list(s): ${missing.join(', ')}. Create with: lists add <id> "<name>"` + (known.size ? `\nexisting: ${[...known].join(', ')}` : ''));
+  }
+  return ids;
+}
+
+function addTags(entry, ids) {
+  const before = entry.lists?.length ?? 0;
+  const merged = [...new Set([...(entry.lists ?? []), ...ids])];
+  if (merged.length) entry.lists = merged;
+  return merged.length - before;
+}
 
 function findEntry(items, key) {
   if (isImdbId(key)) return items.find((it) => it.id === key);
@@ -62,11 +89,13 @@ export async function run(argv, { fetchImpl = fetch, file = WATCHLIST_PATH, log 
       return log(`ok: ${data.items.length} entries`);
 
     case 'list': {
-      const items = data.items.filter((it) => o.all || !it.watched);
+      const [only] = wantedLists(data, o.list);
+      const items = data.items.filter((it) => (o.all || !it.watched) && (!only || it.lists?.includes(only)));
       return log(items.length ? items.map(fmt).join('\n') : '(empty)');
     }
 
     case 'add': {
+      const tags = wantedLists(data, o.list);
       let pick;
       if (o.id) {
         if (!isImdbId(o.id)) throw new Error(`--id must look like tt1375666, got ${o.id}`);
@@ -89,7 +118,12 @@ export async function run(argv, { fetchImpl = fetch, file = WATCHLIST_PATH, log 
       }
 
       const existing = data.items.find((it) => it.id === pick.id);
-      if (existing) return log(`already on the list: ${fmt(existing)}`);
+      if (existing) {
+        if (!addTags(existing, tags)) return log(`already on the list: ${fmt(existing)}`);
+        if (o['dry-run']) return log(`would tag: ${fmt(existing)}`);
+        await saveWatchlist(data, file);
+        return log(`already on the list, tagged: ${fmt(existing)}`);
+      }
 
       const entry = {
         id: pick.id,
@@ -98,6 +132,7 @@ export async function run(argv, { fetchImpl = fetch, file = WATCHLIST_PATH, log 
         ...(pick.year ? { year: pick.year } : {}),
         ...(o.note ? { note: o.note } : {}),
         ...(o.source ? { source: o.source } : {}),
+        ...(tags.length ? { lists: tags } : {}),
         added: today(),
         watched: false,
       };
@@ -117,6 +152,62 @@ export async function run(argv, { fetchImpl = fetch, file = WATCHLIST_PATH, log 
       else entry.watched = cmd === 'watched';
       await saveWatchlist(data, file);
       return log(`${cmd === 'remove' ? 'removed' : `marked ${cmd}`}: ${fmt(entry)}`);
+    }
+
+    case 'tag':
+    case 'untag': {
+      if (!arg) throw new Error(`${cmd} needs an id or exact title, plus --list <id>`);
+      const ids = wantedLists(data, o.list);
+      if (!ids.length) throw new Error(`${cmd} needs --list <id>`);
+      const entry = findEntry(data.items, arg);
+      if (!entry) throw new Error(`not on the watchlist: ${arg} (use add "<title>" --list ${ids[0]})`);
+      if (cmd === 'tag') addTags(entry, ids);
+      else {
+        entry.lists = (entry.lists ?? []).filter((l) => !ids.includes(l));
+        if (!entry.lists.length) delete entry.lists;
+      }
+      await saveWatchlist(data, file);
+      return log(`${cmd === 'tag' ? 'tagged' : 'untagged'}: ${fmt(entry)}`);
+    }
+
+    case 'lists': {
+      const [sub, id, ...nameParts] = rest;
+      const name = nameParts.join(' ').trim();
+      data.lists ??= [];
+      const list = data.lists.find((l) => l.id === id);
+      if (!sub) {
+        if (!data.lists.length) return log('(no themed lists; create one with: lists add <id> "<name>")');
+        return log(
+          data.lists
+            .map((l) => {
+              const n = data.items.filter((it) => !it.watched && it.lists?.includes(l.id)).length;
+              return `${l.id.padEnd(16)} ${String(n).padStart(3)}  ${l.name}`;
+            })
+            .join('\n'),
+        );
+      }
+      if (sub === 'add') {
+        if (!LIST_ID.test(id ?? '')) throw new Error('list id must be lowercase letters, digits, dashes, e.g. "comedy"');
+        if (list) throw new Error(`list "${id}" already exists: ${list.name}`);
+        if (!name) throw new Error('lists add needs a display name, e.g. lists add comedy "Comedies I\'ll like"');
+        data.lists.push({ id, name });
+        await saveWatchlist(data, file);
+        return log(`created list ${id}: ${name}`);
+      }
+      if (!list) throw new Error(`no list "${id ?? ''}"`);
+      if (sub === 'rename') {
+        if (!name) throw new Error('lists rename needs a new name');
+        list.name = name;
+      } else if (sub === 'remove') {
+        data.lists.splice(data.lists.indexOf(list), 1);
+        for (const it of data.items) {
+          if (!it.lists) continue;
+          it.lists = it.lists.filter((l) => l !== id);
+          if (!it.lists.length) delete it.lists;
+        }
+      } else throw new Error(`unknown lists subcommand "${sub}" (add, rename, remove)`);
+      await saveWatchlist(data, file);
+      return log(`${sub === 'remove' ? 'removed' : 'renamed'} list ${id}`);
     }
 
     default:

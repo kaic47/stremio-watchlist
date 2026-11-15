@@ -7,6 +7,7 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 export const WATCHLIST_PATH = path.join(ROOT, 'watchlist.json');
 export const TYPES = ['movie', 'series'];
 const IMDB_ID = /^tt\d{7,10}$/;
+export const LIST_ID = /^[a-z0-9][a-z0-9-]{0,39}$/;
 
 export async function loadWatchlist(file = WATCHLIST_PATH) {
   const data = JSON.parse(await readFile(file, 'utf8'));
@@ -23,7 +24,17 @@ export async function saveWatchlist(data, file = WATCHLIST_PATH) {
 
 export function validate(data) {
   const errors = [];
-  if (!data || !Array.isArray(data.items)) return ['top level must be {"items": [...]}'];
+  if (!data || !Array.isArray(data.items)) return ['top level must be {"lists": [...], "items": [...]}'];
+  const listIds = new Set();
+  if (data.lists != null && !Array.isArray(data.lists)) errors.push('lists must be an array');
+  (data.lists ?? []).forEach((l, i) => {
+    const at = `lists[${i}]`;
+    if (!LIST_ID.test(l?.id ?? '')) errors.push(`${at}: id must be lowercase letters, digits, dashes (e.g. "music")`);
+    if (listIds.has(l?.id)) errors.push(`${at}: duplicate list id ${l.id}`);
+    listIds.add(l?.id);
+    if (typeof l?.name !== 'string' || !l.name.trim()) errors.push(`${at}: name is required`);
+    if (l?.description != null && typeof l.description !== 'string') errors.push(`${at}: description must be a string`);
+  });
   const seen = new Set();
   data.items.forEach((it, i) => {
     const at = `items[${i}]${it?.title ? ` (${it.title})` : ''}`;
@@ -38,6 +49,13 @@ export function validate(data) {
     if (it.watched != null && typeof it.watched !== 'boolean') errors.push(`${at}: watched must be true/false`);
     for (const k of ['note', 'source', 'poster']) {
       if (it[k] != null && typeof it[k] !== 'string') errors.push(`${at}: ${k} must be a string`);
+    }
+    if (it.lists != null) {
+      if (!Array.isArray(it.lists)) errors.push(`${at}: lists must be an array of list ids`);
+      else
+        for (const l of it.lists) {
+          if (!listIds.has(l)) errors.push(`${at}: unknown list "${l}" (define it in top-level "lists")`);
+        }
     }
   });
   return errors;

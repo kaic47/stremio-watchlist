@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { validate, rank, lookupTitle, lookupId } from '../scripts/lib.mjs';
 import { run } from '../scripts/watchlist.mjs';
-import { build, buildCatalog, buildManifest } from '../scripts/build.mjs';
+import { build, buildCatalog, buildCatalogDefs, buildManifest, buildVersion } from '../scripts/build.mjs';
 
 // Fake fetch keyed by URL substring.
 const fakeFetch = (routes) => async (url) => {
@@ -23,10 +23,10 @@ const CINEMETA_DUNE = {
   ],
 };
 
-async function tempList(items = []) {
+async function tempList(items = [], lists = []) {
   const dir = await mkdtemp(path.join(tmpdir(), 'wl-'));
   const file = path.join(dir, 'watchlist.json');
-  await writeFile(file, JSON.stringify({ items }));
+  await writeFile(file, JSON.stringify({ lists, items }));
   return file;
 }
 
@@ -132,14 +132,84 @@ test('catalog: per type, newest first, watched hidden, description from note/sou
   assert.deepEqual(buildCatalog(items, 'series').metas.map((m) => m.id), ['tt0000004']);
 });
 
+test('validate checks themed lists', () => {
+  const lists = [{ id: 'music', name: 'Music' }];
+  assert.deepEqual(validate({ lists, items: [{ id: 'tt1375666', type: 'movie', title: 'X', lists: ['music'] }] }), []);
+  const errs = validate({
+    lists: [...lists, { id: 'Bad Id', name: '' }, { id: 'music', name: 'dup' }],
+    items: [{ id: 'tt1375666', type: 'movie', title: 'X', lists: ['nope'] }],
+  });
+  assert.match(errs.join('\n'), /lowercase/);
+  assert.match(errs.join('\n'), /duplicate list id/);
+  assert.match(errs.join('\n'), /unknown list "nope"/);
+});
+
+test('CLI themed lists: create, add --list, tag existing, untag, remove list', async () => {
+  const file = await tempList();
+  const out = [];
+  const opts = { file, log: (s) => out.push(s), warn: () => {}, fetchImpl: fakeFetch({}) };
+  const read = async () => JSON.parse(await readFile(file, 'utf8'));
+  const offline = (id, title) => ['add', '--id', id, '--title', title, '--type', 'movie'];
+
+  await run(['lists', 'add', 'music', 'Music', 'films'], opts);
+  await run(['lists', 'add', 'comedy', 'Comedies'], opts);
+  await assert.rejects(run([...offline('tt0000001', 'A'), '--list', 'horror'], opts), /unknown list\(s\): horror/);
+
+  await run([...offline('tt0000001', 'A'), '--list', 'music,comedy'], opts);
+  await run([...offline('tt0000002', 'B')], opts);
+  await run([...offline('tt0000002', 'B'), '--list', 'music'], opts); // already present: just tags
+  assert.match(out.at(-1), /tagged/);
+  let d = await read();
+  assert.deepEqual(d.lists.map((l) => l.name), ['Music films', 'Comedies']);
+  assert.deepEqual(d.items.map((i) => i.lists), [['music', 'comedy'], ['music']]);
+
+  await run(['untag', 'A', '--list', 'comedy'], opts);
+  await run(['tag', 'tt0000002', '--list', 'comedy'], opts);
+  await run(['list', '--list', 'comedy'], opts);
+  assert.match(out.at(-1), /^tt0000002/);
+  await run(['lists'], opts);
+  assert.match(out.at(-1), /music\s+2  Music films\ncomedy\s+1  Comedies/);
+
+  await run(['lists', 'remove', 'music'], opts);
+  d = await read();
+  assert.deepEqual(d.lists.map((l) => l.id), ['comedy']);
+  assert.deepEqual(d.items.map((i) => i.lists), [undefined, ['comedy']]);
+});
+
+test('catalog defs: main row always, themed rows only when non-empty per type', () => {
+  const data = {
+    lists: [
+      { id: 'music', name: 'Music' },
+      { id: 'comedy', name: 'Comedy' },
+    ],
+    items: [
+      { id: 'tt0000001', type: 'movie', title: 'A', lists: ['music'] },
+      { id: 'tt0000002', type: 'series', title: 'B', lists: ['music'] },
+      { id: 'tt0000003', type: 'movie', title: 'C', lists: ['comedy'], watched: true },
+    ],
+  };
+  const defs = buildCatalogDefs(data);
+  assert.deepEqual(
+    defs.map((d) => `${d.id}/${d.type}`),
+    ['watchlist/movie', 'watchlist/series', 'list-music/movie', 'list-music/series'],
+  );
+  assert.deepEqual(buildCatalog(data.items, 'movie', 'music').metas.map((m) => m.id), ['tt0000001']);
+  assert.deepEqual(buildCatalog(data.items, 'movie').metas.map((m) => m.id), ['tt0000001']);
+  assert.equal(buildVersion('1.0.0', 120000), '1.0.2');
+});
+
 test('build writes a valid static addon', async () => {
-  const src = await tempList([{ id: 'tt1375666', type: 'movie', title: 'Inception', year: 2010, added: '2026-11-15' }]);
+  const src = await tempList(
+    [{ id: 'tt1375666', type: 'movie', title: 'Inception', year: 2010, added: '2026-11-15', lists: ['mind'] }],
+    [{ id: 'mind', name: 'Mind-benders' }],
+  );
   const out = path.join(path.dirname(src), 'dist');
   const counts = await build({ src, out });
-  assert.deepEqual(counts, { movie: 1, series: 0 });
+  assert.deepEqual(counts, { 'watchlist/movie': 1, 'watchlist/series': 0, 'list-mind/movie': 1 });
   const manifest = JSON.parse(await readFile(path.join(out, 'manifest.json'), 'utf8'));
-  assert.deepEqual(manifest, buildManifest(manifest.version));
   assert.match(manifest.version, /^\d+\.\d+\.\d+$/);
+  assert.deepEqual(manifest.catalogs.at(-1), { type: 'movie', id: 'list-mind', name: 'Mind-benders' });
+  assert.deepEqual(manifest, buildManifest(manifest.version, buildCatalogDefs({ lists: [{ id: 'mind', name: 'Mind-benders' }], items: [{ id: 'tt1375666', type: 'movie', title: 'Inception', lists: ['mind'] }] })));
   for (const c of manifest.catalogs) {
     const cat = JSON.parse(await readFile(path.join(out, 'catalog', c.type, `${c.id}.json`), 'utf8'));
     assert.ok(Array.isArray(cat.metas));
