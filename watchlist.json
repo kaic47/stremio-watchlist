@@ -1,0 +1,7 @@
+{
+  "lists": [
+    { "id": "music", "name": "Music films I'll like" },
+    { "id": "comedy", "name": "Comedies I'll like" }
+  ],
+  "items": []
+}

@@ -1,0 +1,15 @@
+{
+  "name": "stremio-watchlist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal film watchlist served as a static Stremio catalog addon",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "add": "node scripts/watchlist.mjs add",
+    "wl": "node scripts/watchlist.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test",
+    "serve": "node scripts/build.mjs && npx --yes serve -C -l 7000 dist"
+  }
+}
