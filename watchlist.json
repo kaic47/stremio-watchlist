@@ -1,7 +1,230 @@
 {
   "lists": [
-    { "id": "music", "name": "Music films I'll like" },
-    { "id": "comedy", "name": "Comedies I'll like" }
+    {
+      "id": "music",
+      "name": "Music films I'll like"
+    },
+    {
+      "id": "comedy",
+      "name": "Comedies I'll like"
+    }
   ],
-  "items": []
+  "items": [
+    {
+      "id": "tt9735318",
+      "type": "series",
+      "title": "The Beatles: Get Back",
+      "year": 2021,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt2948372",
+      "type": "movie",
+      "title": "Soul",
+      "year": 2020,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt0097814",
+      "type": "movie",
+      "title": "Kiki's Delivery Service",
+      "year": 1989,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt21819228",
+      "type": "movie",
+      "title": "Stutz",
+      "year": 2022,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt0907657",
+      "type": "movie",
+      "title": "Once",
+      "year": 2007,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt1980929",
+      "type": "movie",
+      "title": "Begin Again",
+      "year": 2013,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt3544112",
+      "type": "movie",
+      "title": "Sing Street",
+      "year": 2016,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt0903657",
+      "type": "movie",
+      "title": "Love & Mercy",
+      "year": 2014,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt15737898",
+      "type": "movie",
+      "title": "Blue Giant",
+      "year": 2023,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt6744250",
+      "type": "movie",
+      "title": "Sisters with Transistors",
+      "year": 2020,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt3090634",
+      "type": "movie",
+      "title": "Eden",
+      "year": 2014,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt3787590",
+      "type": "movie",
+      "title": "We Are Your Friends",
+      "year": 2015,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt0185014",
+      "type": "movie",
+      "title": "Wonder Boys",
+      "year": 2000,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt0268126",
+      "type": "movie",
+      "title": "Adaptation.",
+      "year": 2002,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt2883512",
+      "type": "movie",
+      "title": "Chef",
+      "year": 2014,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt5247022",
+      "type": "movie",
+      "title": "Paterson",
+      "year": 2016,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt27503384",
+      "type": "movie",
+      "title": "Perfect Days",
+      "year": 2023,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt10986410",
+      "type": "series",
+      "title": "Ted Lasso",
+      "year": 2020,
+      "source": "thread: Recommend films about self-imposed pressure",
+      "lists": [
+        "music"
+      ],
+      "added": "2026-11-15",
+      "watched": false
+    }
+  ]
 }
