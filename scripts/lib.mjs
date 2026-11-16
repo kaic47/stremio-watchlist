@@ -68,7 +68,7 @@ export const today = () => new Date().toISOString().slice(0, 10);
 // Cinemeta (Stremio's own metadata addon) first, IMDb's public suggestion endpoint as fallback.
 // Neither needs an API key.
 
-const norm = (s) =>
+export const norm = (s) =>
   String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/&/g, 'and').replace(/[^a-z0-9]+/g, ' ').trim();
 
 const firstYear = (v) => {

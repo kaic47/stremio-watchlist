@@ -12,6 +12,27 @@ pull to refresh / reopen the Board). A brand-new themed row needs Stremio to re-
 the manifest version for that, but if the row doesn't appear after restarting Stremio, reinstall the addon from the
 install page.
 
+## Taste profile
+
+[TASTE.md](TASTE.md) records what Kai likes and dislikes, with reasons. Recommendation threads read it first and
+write Kai's feedback back into it ([AGENTS.md](AGENTS.md) has the rules). `history.json` logs films watched, with ratings.
+
+```sh
+node scripts/watchlist.mjs watched "Soul" --rating 4 --note "warm, made me want to make music"
+node scripts/watchlist.mjs watched "Whiplash" --year 2014 --rating 3 --note "too punishing"   # not on the list: history only
+node scripts/watchlist.mjs history --min 4.5            # loves
+node scripts/watchlist.mjs history --max 2              # dislikes
+node scripts/watchlist.mjs import ~/Downloads/letterboxd-kai-2026-11-16   # unzipped Letterboxd export
+node scripts/watchlist.mjs import ~/Downloads/ratings.csv                  # IMDb "Your Ratings" export
+node scripts/watchlist.mjs import ~/Downloads/trakt-export --dry-run       # Trakt JSON export
+```
+
+Ratings are 0.5–5 in half steps; `4/5` and `8/10` are accepted too, and IMDb/Trakt 1–10 ratings are halved on import.
+Imports never overwrite a verdict entered with `watched`, and rerunning one only applies changes.
+
+`history.json` entries: `title` (required), `id` (IMDb, when known), `type`, `year`, `rating`, `liked`, `date`
+(`YYYY-MM-DD`), `note`, `source` (`manual`, `letterboxd`, `imdb`, `trakt`).
+
 ## Themed lists
 
 One watchlist; any entry can also be in any number of themed lists. Each themed list is its own Stremio row.
@@ -39,10 +60,10 @@ node scripts/watchlist.mjs add "Severance" --type series
 node scripts/watchlist.mjs add "Dune" --dry-run              # preview the match, write nothing
 node scripts/watchlist.mjs add --id tt1160419                # by IMDb id (title fetched)
 node scripts/watchlist.mjs add --id tt1160419 --title "Dune" --type movie --year 2021   # fully offline
-node scripts/watchlist.mjs watched "Dune"                    # hide from catalog, keep in file
+node scripts/watchlist.mjs watched "Dune" --rating 4        # hide from catalog, log to history.json
 node scripts/watchlist.mjs remove tt1160419
 node scripts/watchlist.mjs list [--all]
-node scripts/watchlist.mjs check                             # validate the file
+node scripts/watchlist.mjs check                             # validate watchlist.json + history.json
 ```
 
 Title lookup tries Stremio's Cinemeta search first, then IMDb's public suggestion endpoint. The best match wins

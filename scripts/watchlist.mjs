@@ -3,6 +3,7 @@
 import { parseArgs } from 'node:util';
 import { pathToFileURL } from 'node:url';
 import { loadWatchlist, saveWatchlist, lookupTitle, lookupId, isImdbId, today, TYPES, LIST_ID, WATCHLIST_PATH } from './lib.mjs';
+import { historyPathFor, loadHistory, saveHistory, parseRating, upsert, findHistory, importExport, fmtHistory } from './history.mjs';
 
 const HELP = `Usage: node scripts/watchlist.mjs <command> [options]
 
@@ -23,11 +24,21 @@ const HELP = `Usage: node scripts/watchlist.mjs <command> [options]
   lists add <id> "<name>"        Create a themed list, e.g. lists add comedy "Comedies I'll like".
   lists rename <id> "<name>"     Change its display name in Stremio.
   lists remove <id>              Delete the list and its tags (entries stay on the watchlist).
-  watched <id|title>       Mark watched (hidden from the Stremio catalog, kept in the file).
-  unwatched <id|title>     Undo watched.
+  watched <id|title>       Mark watched (hidden from the Stremio catalog, kept in the file) and log it
+                           in history.json. Works for films not on the watchlist too.
+      --rating <r>         0.5-5 in half steps (4, 3.5, 4/5 or 8/10).
+      --note "<text>"      Your verdict and why ("too punishing, not uplifting").
+      --date <yyyy-mm-dd>  When you watched it (default today).
+      --year/--type/--id   Identify a film that isn't on the watchlist.
+  unwatched <id|title>     Undo watched on the watchlist (history entry stays).
+  history                  Print rated/watched films, best first.
+      --min <r> --max <r>  Only ratings in this range, e.g. --min 4.5 (loves), --max 2 (dislikes).
+  import <file|folder>     Merge a Letterboxd / IMDb / Trakt export into history.json.
+      --format <name>      letterboxd | imdb | trakt (auto-detected if left out).
+      --dry-run            Show counts, write nothing.
   remove <id|title>        Delete the entry.
   list [--all] [--list <id>]  Print unwatched entries (--all includes watched).
-  check                    Validate watchlist.json.
+  check                    Validate watchlist.json and history.json.
 `;
 
 const OPTIONS = {
@@ -39,6 +50,11 @@ const OPTIONS = {
   source: { type: 'string' },
   pick: { type: 'string' },
   list: { type: 'string', multiple: true },
+  rating: { type: 'string' },
+  date: { type: 'string' },
+  min: { type: 'string' },
+  max: { type: 'string' },
+  format: { type: 'string' },
   'dry-run': { type: 'boolean' },
   all: { type: 'boolean' },
   help: { type: 'boolean', short: 'h' },
@@ -83,10 +99,13 @@ export async function run(argv, { fetchImpl = fetch, file = WATCHLIST_PATH, log 
   if (o.year && !Number.isInteger(year)) throw new Error('--year must be a number');
 
   const data = await loadWatchlist(file);
+  const historyFile = historyPathFor(file);
 
   switch (cmd) {
-    case 'check':
-      return log(`ok: ${data.items.length} entries`);
+    case 'check': {
+      const history = await loadHistory(historyFile);
+      return log(`ok: ${data.items.length} entries, ${history.entries.length} in history`);
+    }
 
     case 'list': {
       const [only] = wantedLists(data, o.list);
@@ -142,16 +161,65 @@ export async function run(argv, { fetchImpl = fetch, file = WATCHLIST_PATH, log 
       return log(`added: ${fmt(entry)}`);
     }
 
-    case 'watched':
+    case 'watched': {
+      const key = arg || o.id;
+      if (!key) throw new Error('watched needs an id or exact title');
+      const rating = o.rating != null ? parseRating(o.rating) : undefined;
+      if (o.date && !/^\d{4}-\d{2}-\d{2}$/.test(o.date)) throw new Error('--date must be YYYY-MM-DD');
+      const entry = findEntry(data.items, key) ?? (o.id ? data.items.find((it) => it.id === o.id) : undefined);
+      const film = entry
+        ? { id: entry.id, type: entry.type, title: entry.title, year: entry.year }
+        : {
+            id: o.id ?? (isImdbId(key) ? key : undefined),
+            type: o.type,
+            title: o.title ?? (isImdbId(key) ? undefined : key),
+            year,
+          };
+      if (!film.title) throw new Error(`${key} is not on the watchlist; pass --title to log it`);
+      const history = await loadHistory(historyFile);
+      upsert(history.entries, { ...film, rating, date: o.date ?? today(), note: o.note, source: 'manual' });
+      if (entry && !entry.watched) {
+        entry.watched = true;
+        await saveWatchlist(data, file);
+      }
+      await saveHistory(history, historyFile);
+      const logged = fmtHistory(findHistory(history.entries, film));
+      return log(entry ? `marked watched: ${fmt(entry)}
+history: ${logged}` : `not on the watchlist; logged in history: ${logged}`);
+    }
+
     case 'unwatched':
     case 'remove': {
       if (!arg) throw new Error(`${cmd} needs an id or exact title`);
       const entry = findEntry(data.items, arg);
       if (!entry) throw new Error(`not on the list: ${arg}`);
       if (cmd === 'remove') data.items.splice(data.items.indexOf(entry), 1);
-      else entry.watched = cmd === 'watched';
+      else entry.watched = false;
       await saveWatchlist(data, file);
       return log(`${cmd === 'remove' ? 'removed' : `marked ${cmd}`}: ${fmt(entry)}`);
+    }
+
+    case 'history': {
+      const { entries } = await loadHistory(historyFile);
+      const min = o.min != null ? parseRating(o.min) : undefined;
+      const max = o.max != null ? parseRating(o.max) : undefined;
+      const shown = entries
+        .filter((e) => (min == null || (e.rating ?? -1) >= min) && (max == null || (e.rating ?? 99) <= max))
+        .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0) || (b.date ?? '').localeCompare(a.date ?? ''));
+      return log(shown.length ? `${shown.map(fmtHistory).join('\n')}\n(${shown.length} of ${entries.length})` : '(no history yet)');
+    }
+
+    case 'import': {
+      if (!arg) throw new Error('import needs a file or folder: the unzipped Letterboxd export, IMDb ratings CSV, or Trakt JSON');
+      const { format, entries } = await importExport(arg, o.format);
+      const history = await loadHistory(historyFile);
+      const counts = { added: 0, updated: 0, unchanged: 0 };
+      for (const e of entries) counts[upsert(history.entries, e)]++;
+      const rated = entries.filter((e) => e.rating != null).length;
+      const summary = `${format}: ${entries.length} films read (${rated} rated); ${counts.added} added, ${counts.updated} updated, ${counts.unchanged} unchanged`;
+      if (o['dry-run']) return log(`dry run, nothing written. ${summary}`);
+      await saveHistory(history, historyFile);
+      return log(summary);
     }
 
     case 'tag':
