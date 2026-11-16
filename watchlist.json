@@ -7,6 +7,10 @@
     {
       "id": "comedy",
       "name": "Comedies I'll like"
+    },
+    {
+      "id": "adventure",
+      "name": "Adventure films I'll like"
     }
   ],
   "items": [
@@ -224,6 +228,71 @@
         "music"
       ],
       "added": "2026-11-15",
+      "watched": false
+    },
+    {
+      "id": "tt0092005",
+      "type": "movie",
+      "title": "Stand by Me",
+      "year": 1986,
+      "note": "80s kids on a quest; real, Goonies minus the cartoon. Kai: good pick.",
+      "source": "thread: Recommend adventure movies for tonight",
+      "lists": [
+        "adventure"
+      ],
+      "added": "2026-11-16",
+      "watched": false
+    },
+    {
+      "id": "tt0758758",
+      "type": "movie",
+      "title": "Into the Wild",
+      "year": 2007,
+      "note": "True story, leaving everything to find yourself; Eddie Vedder soundtrack. Kai: good pick.",
+      "source": "thread: Recommend adventure movies for tonight",
+      "lists": [
+        "adventure"
+      ],
+      "added": "2026-11-16",
+      "watched": false
+    },
+    {
+      "id": "tt0454876",
+      "type": "movie",
+      "title": "Life of Pi",
+      "year": 2012,
+      "note": "Survival and perseverance, big concept, visually stunning.",
+      "source": "thread: Recommend adventure movies for tonight",
+      "lists": [
+        "adventure"
+      ],
+      "added": "2026-11-16",
+      "watched": false
+    },
+    {
+      "id": "tt1542344",
+      "type": "movie",
+      "title": "127 Hours",
+      "year": 2010,
+      "note": "True survival story, A.R. Rahman score; intense but ends uplifting.",
+      "source": "thread: Recommend adventure movies for tonight",
+      "lists": [
+        "adventure"
+      ],
+      "added": "2026-11-16",
+      "watched": false
+    },
+    {
+      "id": "tt0318462",
+      "type": "movie",
+      "title": "The Motorcycle Diaries",
+      "year": 2004,
+      "note": "True road trip, youth figuring it out. Spanish, subtitled.",
+      "source": "thread: Recommend adventure movies for tonight",
+      "lists": [
+        "adventure"
+      ],
+      "added": "2026-11-16",
       "watched": false
     }
   ]

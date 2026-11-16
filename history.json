@@ -182,6 +182,66 @@
       "liked": true,
       "note": "Amazing during its prime.",
       "source": "manual"
+    },
+    {
+      "id": "tt0082971",
+      "type": "movie",
+      "title": "Raiders of the Lost Ark",
+      "year": 1981,
+      "liked": true,
+      "note": "Seen and love. Said in the adventure-recs thread, 2026-11-15.",
+      "source": "manual"
+    },
+    {
+      "id": "tt0816692",
+      "type": "movie",
+      "title": "Interstellar",
+      "year": 2014,
+      "liked": true,
+      "note": "Seen and love. Said in the adventure-recs thread, 2026-11-15.",
+      "source": "manual"
+    },
+    {
+      "id": "tt0092067",
+      "type": "movie",
+      "title": "Castle in the Sky",
+      "year": 1986,
+      "liked": true,
+      "note": "Seen. \"Of course I love the Miyazaki movies.\"",
+      "source": "manual"
+    },
+    {
+      "id": "tt0119698",
+      "type": "movie",
+      "title": "Princess Mononoke",
+      "year": 1997,
+      "liked": true,
+      "note": "Seen. \"Of course I love the Miyazaki movies.\"",
+      "source": "manual"
+    },
+    {
+      "id": "tt0359950",
+      "type": "movie",
+      "title": "The Secret Life of Walter Mitty",
+      "year": 2013,
+      "note": "Seen. No verdict given.",
+      "source": "manual"
+    },
+    {
+      "id": "tt4698684",
+      "type": "movie",
+      "title": "Hunt for the Wilderpeople",
+      "year": 2016,
+      "note": "Seen. No verdict given.",
+      "source": "manual"
+    },
+    {
+      "id": "tt1392190",
+      "type": "movie",
+      "title": "Mad Max: Fury Road",
+      "year": 2015,
+      "note": "Didn't like it much: basically no plot, just action, pretty boring, not a lot of human consequences.",
+      "source": "manual"
     }
   ]
 }
