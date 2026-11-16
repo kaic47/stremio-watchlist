@@ -1,0 +1,18 @@
+{
+  "entries": [
+    {
+      "type": "movie",
+      "title": "Tick, Tick... Boom!",
+      "year": 2021,
+      "note": "Loved it for the spirit (pushing through a creative deadline), not the musical side. Unrated.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Whiplash",
+      "year": 2014,
+      "note": "Good, but too intense, not uplifting enough. Unrated.",
+      "source": "manual"
+    }
+  ]
+}
