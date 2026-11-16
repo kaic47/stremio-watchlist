@@ -105,7 +105,7 @@ Shows:
 
 ## Dislikes and soft avoids
 
-- **Mad Max: Fury Road** (2015): "didn't like that much because there's basically no plot and it's just like action, pretty boring to me. Didn't feel like a lot of human consequences." Wall-to-wall action without story or stakes for people doesn't land. *(2026-11-15)*
+- **Mad Max: Fury Road** (2015): "didn't like that much because there's basically no plot and it's just like action, pretty boring to me. Didn't feel like a lot of human consequences." (Inference: wall-to-wall action without story or human stakes doesn't land.) *(2026-11-15)*
 - **Musicals as a form** (characters singing the story). Films about musicians are welcome. *(2026-11-15)*
 - **Niche arthouse**: not a hard no, but "I don't typically want" it.
 - **Really old films** (pre-80s): "not a huge fan of like really old shit", though Kai sometimes appreciates them for their period. 80s are "okay sometimes", 90s "usually okay".
@@ -130,7 +130,7 @@ Who the list was for matters. Lists for other people say nothing about Kai's own
 |------|--------|-----|------|----------------|
 | 2026-11-15 | Recommend films about self-imposed pressure | Kai | 18 picks: Get Back, Soul, Kiki's Delivery Service, Stutz, Once, Begin Again, Sing Street, Love & Mercy, Blue Giant, Sisters with Transistors, Eden (2014), We Are Your Friends, Wonder Boys, Adaptation., Chef, Paterson, Perfect Days, Ted Lasso | "These are fantastic, all of them." All went into the `music` list. |
 | 2026-11-15 | Recommend iconic 80s to 2000s films | Kai's 12-year-old brother and mom | 18 family classics (BTTF, E.T., Goonies, Toy Story, ...) | "These are great." Not Kai's own taste. |
-| 2026-11-15 | Recommend adventure movies for tonight | Kai | 12 picks: Stand by Me, Castle in the Sky, Princess Mononoke, Into the Wild, Walter Mitty, Hunt for the Wilderpeople, Life of Pi, 127 Hours, Mad Max: Fury Road, The Motorcycle Diaries, Raiders, Interstellar | Seen 7 of 12. Good picks: Stand by Me, Into the Wild. Unseen: Life of Pi, 127 Hours, Motorcycle Diaries. Seen and love: Raiders, Interstellar, Miyazaki. Seen, no verdict: Walter Mitty, Wilderpeople. Fury Road disliked. The 5 unseen went into the `adventure` list. Kai has seen a lot of the obvious adventure canon: go deeper. |
+| 2026-11-15 | Recommend adventure movies for tonight | Kai | 12 picks: Stand by Me, Castle in the Sky, Princess Mononoke, Into the Wild, Walter Mitty, Hunt for the Wilderpeople, Life of Pi, 127 Hours, Mad Max: Fury Road, The Motorcycle Diaries, Raiders, Interstellar | Seen 7 of 12. Good picks: Stand by Me, Into the Wild. Unseen: Life of Pi, 127 Hours, Motorcycle Diaries. Seen and love: Raiders, Interstellar, Miyazaki. Seen, no verdict: Walter Mitty, Wilderpeople. Fury Road disliked. The 5 unseen went into the `adventure` list. (Inference: Kai has seen most of the obvious adventure canon, so go deeper next time.) |
 | 2026-11-15 | Recommend iconic 80s to 2000s films | adults in their 20s | 18 iconic picks (Breakfast Club, Pulp Fiction, Matrix, Dark Knight, Eternal Sunshine, ...) | No reaction recorded. Kai has seen Eternal Sunshine and Ferris Bueller (both loved), and likely the Tarantino and Nolan films. |
 
 ## Open questions (ask Kai, then move the answers above)
