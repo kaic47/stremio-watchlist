@@ -4,8 +4,8 @@ This is the single source of truth for what Kai likes. Every recommendation thre
 Kai's feedback back into it before finishing (see [AGENTS.md](AGENTS.md)). Keep each entry to one line with the
 reason, and use Kai's own words where possible. Date anything that can go stale.
 
-**Status (2026-11-16): thin.** Almost everything below comes from one conversation about one mood (pressure while
-finishing an EP). Don't generalise from it. Ask Kai the open questions at the bottom when a request touches them.
+**Status (2026-11-16):** first real profile, from Kai's own answers to a taste questionnaire. Still open: subtitles,
+runtime, recent ratings (see Open questions).
 
 ## How to weigh evidence
 
@@ -20,41 +20,103 @@ finishing an EP). Don't generalise from it. Ask Kai the open questions at the bo
 Accepting a list of picks ("these are fantastic, add them all") means the pitch landed, not that Kai has seen and
 liked the films. Don't promote picks to Loves until Kai has watched and rated them.
 
+## The short version
+
+Kai wants films that **feel real, inspiring and grounded**, with **great dialogue** and **a great soundtrack**. Kai also
+loves **adventure**, **sharp satire and absurd comedy**, and **the canon**: "really interested in watching all of the best
+ones ever". Culturally relevant beats niche. Sad is fine if it means something. Being made by music people,
+or about music, is a strong plus.
+
 ## About Kai
 
-- Professional electronic music producer. Music films and films about making things hit close to home.
-- Mostly wants films. Some shows are fine.
+- Professional electronic music producer (bass music) and touring musician. Films about musicians, youth, and
+  figuring it out hit close to home.
+- Very open-minded about concepts. Not usually after niche arthouse: "things that are culturally relevant are often
+  more impressive to me because of their ability to be so. It's hard to do."
+- Loves films that teach something or grow a passion: "anything that helps me understand something or learn or grow
+  a passion is often great."
+- Soundtrack and composer matter a lot. Joe Hisaishi is a favourite composer. Mac Miller is a favourite musician, and Kai
+  likes the Eternal Sunshine link: Jon Brion scored it and also worked on Mac Miller's *Swimming* and *Circles*.
+- Mostly films, but loves great prestige TV and comedy shows.
 - Wants terse, blunt recommendation lists, one line per pick with the reason.
+
+## What makes a film land (Kai's reasons, by theme)
+
+- **Real, relatable, grounded human stories** about relationships, without being sappy rom-coms ("I don't even mind sappy").
+  Good Will Hunting, The Perks of Being a Wallflower ("felt really real"), 10 Things I Hate About You.
+- **Inspiring and perseverance stories.** Good Will Hunting, Lion ("an extraordinary tale of perseverance"), Tick, Tick... Boom!
+- **Witty, sharp dialogue.** Good Will Hunting: "the dialogue is insane."
+- **Great soundtrack.** Called out for Good Will Hunting, Almost Famous, Eternal Sunshine, and Hisaishi's Miyazaki scores.
+- **Youth and figuring it out, music-scene romance.** Almost Famous: band drama and the touring life, "romanticizes music in a beautiful way".
+- **Adventure.** "Any kind of adventure movie is awesome." "Adventure tales, huge W." Lord of the Rings, The Goonies.
+- **Fun 80s and 90s high-school films**, which Kai has been into lately. Ferris Bueller's Day Off, 10 Things I Hate About You.
+- **Nostalgia and comfort.** Harry Potter (read all the books as a kid), Miyazaki.
+- **Surreal, magical, well-meant art.** Miyazaki: "you can tell he's really well intended with his art", and Kai likes his strong female leads.
+- **Sad but meaningful, with an interesting concept.** Eternal Sunshine: "one of the saddest movies I've ever seen... really struck a chord."
+- **Great backstories.** Good Will Hunting being written by two college kids is part of the appeal.
+
+## Comedy
+
+- **Satire and cringe stunts on real people:** Borat ("genius... fooled all those people", "made fun of everyone around
+  him without them noticing"), Nathan For You and everything Nathan Fielder has made.
+- **Absurd, "fried" humour:** I Think You Should Leave.
+- **Animated satire:** South Park (also impressed by the creators' independence), Rick and Morty "during its prime".
+- **Will Ferrell classics:** Step Brothers is "one of the funniest movies ever", but that style is "not usually what I'm
+  looking for anymore".
+- Kai wants good new comedy and finds it hard to come by ("comedy lately has been slacking"). A real gap to fill.
 
 ## Loves
 
-- **Tick, Tick... Boom!** (2021): loved it for its spirit: someone driving themselves hard toward a creative
-  deadline and coming through it. Not for the musical side. *(2026-11-15)*
+Films:
+- **Good Will Hunting** (1997), a top-3 film: inspiring, insane dialogue, beautiful characters, relatable, feels real, fantastic soundtrack, great backstory.
+- **Spirited Away** (2001), top 3: beautiful animation, Joe Hisaishi's score, surreal and magical, nostalgic. "All of [Miyazaki's] movies are fantastic."
+- **Almost Famous** (2000), top 3: inspiring and relatable as a musician, youth, band drama, shaped how Kai romanticised touring, insane soundtrack, Penny Lane.
+- **Harry Potter** films: nostalgic and comforting. Read all the books as a kid.
+- **The Perks of Being a Wallflower** (2012): wholesome, funny, felt really real.
+- **10 Things I Hate About You** (1999): wholesome, funny, feels real.
+- **Eternal Sunshine of the Spotless Mind** (2004): beautifully sad, interesting concept, soundtrack, the Mac Miller link.
+- **The Lord of the Rings** trilogy: "absolutely fantastic". Adventure.
+- **The Goonies** (1985): "amazing, classic, wholesome, uplifting, adventurous."
+- **Ferris Bueller's Day Off** (1986): fun 80s high school.
+- **Borat** (2006): satire genius.
+- **Step Brothers** (2008): one of the funniest ever.
+- **Tick, Tick... Boom!** (2021): loved the spirit of pushing through a creative deadline. Not for the musical side.
+- **Lion** (2016), seen recently: liked it as an extraordinary tale of perseverance.
+
+Shows:
+- **Breaking Bad**: "one of the best ever."
+- **Game of Thrones**.
+- **True Detective**, season 1: "incredible."
+- **Nathan For You** and other Nathan Fielder work, **I Think You Should Leave**, **South Park**, **Rick and Morty** (prime seasons).
+
+## Directors and creators to follow
+
+- **Christopher Nolan**: "insane."
+- **Quentin Tarantino**: "a lot of the classics."
+- **Hayao Miyazaki** (and Joe Hisaishi as composer).
+- **Nathan Fielder**. **Trey Parker and Matt Stone**.
 
 ## Liked, with reservations
 
 - **Whiplash** (2014): "good, but a little bit too intense, not uplifting enough." *(2026-11-15)*
 
-## Dislikes
+## Dislikes and soft avoids
 
-- **Musicals as a form** (characters singing the story). Films about musicians are welcome; musicals aren't. *(2026-11-15)*
+- **Musicals as a form** (characters singing the story). Films about musicians are welcome. *(2026-11-15)*
+- **Niche arthouse**: not a hard no, but "I don't typically want" it.
+- **Really old films** (pre-80s): "not a huge fan of like really old shit", though Kai sometimes appreciates them for their period. 80s are "okay sometimes", 90s "usually okay".
+- **Anime as a genre**: "not particularly into anime... not against getting into it", but "it might not be often what I'm looking for." Miyazaki is the exception.
+- Kai can't think of many widely loved films they disliked.
 
 ## Dealbreakers
 
-None known yet. Ask before assuming any.
-
-## Tendencies (inferred, low confidence)
-
-- Prefers uplifting or hopeful endings over punishing ones. Source: the Whiplash comment and the Tick, Tick... Boom!
-  praise. Not yet tested outside music films.
-- Likely open to: documentaries (accepted Stutz, Sisters with Transistors, Get Back), animation and anime (accepted
-  Soul, Kiki's Delivery Service, Blue Giant), and quiet slow films (accepted Paterson, Perfect Days). Accepted
-  pitches only, nothing watched yet.
+None. "I have no hard no's as far as tone." *(2026-11-16)*
 
 ## Current context
 
 - **2026-11-15:** stressed, struggling to finish an EP. Asked for films about overcoming self-imposed pressure,
-  stress and creative block. Revisit this once the EP is done; it shouldn't steer every list forever.
+  stress and creative block. Revisit once the EP is done; it shouldn't steer every list forever.
+- **2026-11-16:** into 80s and 90s films lately, especially fun high-school ones.
 
 ## Reactions to recommendation lists
 
@@ -64,22 +126,18 @@ Who the list was for matters. Lists for other people say nothing about Kai's own
 |------|--------|-----|------|----------------|
 | 2026-11-15 | Recommend films about self-imposed pressure | Kai | 18 picks: Get Back, Soul, Kiki's Delivery Service, Stutz, Once, Begin Again, Sing Street, Love & Mercy, Blue Giant, Sisters with Transistors, Eden (2014), We Are Your Friends, Wonder Boys, Adaptation., Chef, Paterson, Perfect Days, Ted Lasso | "These are fantastic, all of them." All went into the `music` list. |
 | 2026-11-15 | Recommend iconic 80s to 2000s films | Kai's 12-year-old brother and mom | 18 family classics (BTTF, E.T., Goonies, Toy Story, ...) | "These are great." Not Kai's own taste. |
-| 2026-11-15 | Recommend iconic 80s to 2000s films | adults in their 20s | 18 iconic picks (Breakfast Club, Pulp Fiction, Matrix, Dark Knight, Eternal Sunshine, ...) | No reaction recorded yet. Unknown which ones Kai has already seen. |
+| 2026-11-15 | Recommend iconic 80s to 2000s films | adults in their 20s | 18 iconic picks (Breakfast Club, Pulp Fiction, Matrix, Dark Knight, Eternal Sunshine, ...) | No reaction recorded. Kai has seen Eternal Sunshine and Ferris Bueller (both loved), and likely the Tarantino and Nolan films. |
 
 ## Open questions (ask Kai, then move the answers above)
 
-1. 10 to 15 favourite films of all time, and why.
-2. Widely loved films Kai disliked, and why.
-3. Genres loved and genres avoided (horror, war, rom-com, sci-fi, crime, slow arthouse).
-4. Subtitles and foreign-language films: fine or not?
-5. Animation and documentaries outside music: fine?
-6. How dark can a film get if it ends well? Any hard no's (animal death, sexual violence, gore)?
-7. Older films: is there a cutoff? Long runtimes (2.5h+): fine?
-8. Directors or actors Kai follows.
-9. Shows Kai has loved.
-10. Last 5 films watched, with a rating for each.
-11. Which of the iconic 80s to 2000s adult picks Kai has already seen, and what Kai thought of them.
+1. Subtitles and foreign-language live action: fine or not?
+2. Long runtimes (2.5h+): fine? (LOTR and Nolan suggest yes.)
+3. Last 5 films watched, with a rating for each.
+4. Which Nolan and Tarantino films has Kai seen, and which of the 20s iconic picks?
+5. Documentaries outside music: fine? ("learn or grow a passion" suggests yes.)
+6. Which comedies in the last ~5 years, if any, actually landed?
 
 ## Changelog
 
 - 2026-11-16: created from the 2026-11-15 recommendation threads.
+- 2026-11-16: added Kai's questionnaire answers (favourites, reasons, comedy, era, directors, shows).

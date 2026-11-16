@@ -39,3 +39,4 @@ threads push here too.
   Entries from `import` carry `source: letterboxd|imdb|trakt` and may lack an IMDb id. Treat them as weak signal
   (see TASTE.md). Entries from `watched` carry `source: manual` and always win over imports.
 - `node scripts/watchlist.mjs import <folder|file>` merges an export. It is idempotent; rerun it with a newer export.
+- `liked: true` with no rating means Kai named it as a favourite in words; treat it like a 4.5-5.

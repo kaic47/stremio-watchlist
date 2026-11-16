@@ -5,13 +5,182 @@
       "title": "Tick, Tick... Boom!",
       "year": 2021,
       "note": "Loved it for the spirit (pushing through a creative deadline), not the musical side. Unrated.",
-      "source": "manual"
+      "source": "manual",
+      "liked": true
     },
     {
       "type": "movie",
       "title": "Whiplash",
       "year": 2014,
       "note": "Good, but too intense, not uplifting enough. Unrated.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Good Will Hunting",
+      "year": 1997,
+      "liked": true,
+      "note": "Top 3. Inspiring, insane dialogue, feels real, great soundtrack.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Spirited Away",
+      "year": 2001,
+      "liked": true,
+      "note": "Top 3. Hisaishi score, surreal, magical, nostalgic.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Almost Famous",
+      "year": 2000,
+      "liked": true,
+      "note": "Top 3. Youth, band drama, touring life, soundtrack.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "The Perks of Being a Wallflower",
+      "year": 2012,
+      "liked": true,
+      "note": "Wholesome, funny, felt really real.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "10 Things I Hate About You",
+      "year": 1999,
+      "liked": true,
+      "note": "Wholesome, funny, feels real.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Eternal Sunshine of the Spotless Mind",
+      "year": 2004,
+      "liked": true,
+      "note": "Beautifully sad, great concept and soundtrack.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "year": 2001,
+      "liked": true,
+      "note": "LOTR trilogy: absolutely fantastic.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "The Lord of the Rings: The Two Towers",
+      "year": 2002,
+      "liked": true,
+      "note": "LOTR trilogy: absolutely fantastic.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "The Lord of the Rings: The Return of the King",
+      "year": 2003,
+      "liked": true,
+      "note": "LOTR trilogy: absolutely fantastic.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "The Goonies",
+      "year": 1985,
+      "liked": true,
+      "note": "Classic, wholesome, uplifting, adventurous.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Ferris Bueller's Day Off",
+      "year": 1986,
+      "liked": true,
+      "note": "Fun 80s high school.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Borat",
+      "year": 2006,
+      "liked": true,
+      "note": "Satire genius.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Step Brothers",
+      "year": 2008,
+      "liked": true,
+      "note": "One of the funniest movies ever.",
+      "source": "manual"
+    },
+    {
+      "type": "movie",
+      "title": "Lion",
+      "year": 2016,
+      "liked": true,
+      "note": "Extraordinary tale of perseverance. Seen Nov 2026.",
+      "source": "manual"
+    },
+    {
+      "type": "series",
+      "title": "Breaking Bad",
+      "year": 2008,
+      "liked": true,
+      "note": "One of the best ever.",
+      "source": "manual"
+    },
+    {
+      "type": "series",
+      "title": "Game of Thrones",
+      "year": 2011,
+      "liked": true,
+      "note": "Loved it.",
+      "source": "manual"
+    },
+    {
+      "type": "series",
+      "title": "True Detective",
+      "year": 2014,
+      "liked": true,
+      "note": "Season 1 incredible.",
+      "source": "manual"
+    },
+    {
+      "type": "series",
+      "title": "Nathan for You",
+      "year": 2013,
+      "liked": true,
+      "note": "Satire on real people; loves all Nathan Fielder work.",
+      "source": "manual"
+    },
+    {
+      "type": "series",
+      "title": "I Think You Should Leave with Tim Robinson",
+      "year": 2019,
+      "liked": true,
+      "note": "Fried sense of humour.",
+      "source": "manual"
+    },
+    {
+      "type": "series",
+      "title": "South Park",
+      "year": 1997,
+      "liked": true,
+      "note": "Amazing.",
+      "source": "manual"
+    },
+    {
+      "type": "series",
+      "title": "Rick and Morty",
+      "year": 2013,
+      "liked": true,
+      "note": "Amazing during its prime.",
       "source": "manual"
     }
   ]
